@@ -5,9 +5,14 @@ import 'package:shopp/utils/app_routes.dart';
 import '../models/product.dart';
 
 class ProductItem extends StatelessWidget {
+  const ProductItem({super.key});
+
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<Product>(context);
+    final provider = Provider.of<Product>(
+      context,
+      listen: false,
+    );
     final product = provider;
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),
@@ -18,13 +23,15 @@ class ProductItem extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           backgroundColor: Colors.black54,
-          leading: IconButton(
-            color: Theme.of(context).highlightColor,
-            onPressed: () {
-              product.toggleFavorite();
-            },
-            icon: Icon(
-              product.isFavorite ? Icons.favorite : Icons.favorite_border,
+          leading: Consumer<Product>(
+            builder: (ctx, product, _) => IconButton(
+              color: Theme.of(context).highlightColor,
+              onPressed: () {
+                product.toggleFavorite();
+              },
+              icon: Icon(
+                product.isFavorite ? Icons.favorite : Icons.favorite_border,
+              ),
             ),
           ),
           trailing: IconButton(

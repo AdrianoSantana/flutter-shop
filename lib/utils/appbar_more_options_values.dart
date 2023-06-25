@@ -1,0 +1,4 @@
+enum MoreOptionsValue {
+  onlyFavoritesProducts,
+  allProducts,
+}
